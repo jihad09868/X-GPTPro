@@ -1,0 +1,365 @@
+/* ============================================
+   X-GPT Global Styles & Animations
+   ============================================ */
+
+/* Import High-Quality Bengali Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@100..900&display=swap');
+
+:root {
+  --font-primary: 'Inter', 'Segoe UI', 'Roboto', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+  --font-serif: 'Georgia', 'Times New Roman', 'Hind Siliguri', serif;
+}
+
+body {
+  font-family: var(--font-primary);
+}
+
+/* --- AI Text Generation Animation --- */
+/* Each character appears with a smooth fade-in and slight move */
+@keyframes charVisible {
+  0% {
+    opacity: 0;
+    filter: blur(1px);
+    transform: translateY(2px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.ai-char-visible {
+  display: inline-block;
+  animation: charVisible 0.1s ease-out forwards;
+}
+
+/* --- Lighting/Shimmer Animation for Thinking Hint --- */
+@keyframes thinkingLighting {
+  0% {
+    background-position: -200% 0;
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    background-position: 200% 0;
+    opacity: 0.5;
+  }
+}
+
+.thinking-hint-shimmer {
+  background: linear-gradient(90deg,
+      rgba(150, 150, 150, 0.4) 25%,
+      rgba(180, 180, 180, 0.9) 50%,
+      rgba(150, 150, 150, 0.4) 75%);
+  background-size: 200% 100%;
+  animation: thinkingLighting 2s infinite linear;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Settings Icon */
+.settings-icon-animated:active {
+  animation: settingsRotate 0.5s ease-in-out;
+}
+
+/* Sidebar & Search Pop-up Transitions */
+.sidebar-transition {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease;
+}
+
+.popup-slow-open {
+  animation: popupSlowOpen 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes popupSlowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* --- Smoke particles rising from text --- */
+@keyframes smokeRise {
+  0% {
+    opacity: 0.85;
+    transform: translateY(0px) translateX(0px) scale(0.3);
+    filter: blur(1px);
+  }
+
+  30% {
+    opacity: 0.6;
+    transform: translateY(-8px) translateX(var(--smoke-drift, 3px)) scale(0.6);
+    filter: blur(2px);
+  }
+
+  60% {
+    opacity: 0.3;
+    transform: translateY(-18px) translateX(var(--smoke-drift, -2px)) scale(0.9);
+    filter: blur(4px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) translateX(var(--smoke-drift, 5px)) scale(1.2);
+    filter: blur(6px);
+  }
+}
+
+@keyframes smokeRise2 {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0px) translateX(0px) scale(0.2);
+    filter: blur(1px);
+  }
+
+  40% {
+    opacity: 0.45;
+    transform: translateY(-12px) translateX(-4px) scale(0.5);
+    filter: blur(3px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) translateX(2px) scale(1);
+    filter: blur(5px);
+  }
+}
+
+@keyframes smokeRise3 {
+  0% {
+    opacity: 0.6;
+    transform: translateY(0px) translateX(2px) scale(0.25);
+    filter: blur(0.5px);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: translateY(-10px) translateX(-3px) scale(0.7);
+    filter: blur(3px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-25px) translateX(4px) scale(1.1);
+    filter: blur(7px);
+  }
+}
+
+/* The smoke wrapper that appears on each new word */
+.ai-word-smoke {
+  position: relative;
+  display: inline;
+}
+
+.ai-word-smoke::before,
+.ai-word-smoke::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ai-word-smoke::before {
+  animation: smokeRise 0.8s ease-out forwards;
+  --smoke-drift: 3px;
+  margin-left: -3px;
+}
+
+.ai-word-smoke::after {
+  animation: smokeRise2 0.9s ease-out 0.05s forwards;
+  margin-left: 2px;
+}
+
+/* Third smoke particle via a child span */
+.ai-word-smoke .smoke-particle {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 10;
+  animation: smokeRise3 1s ease-out 0.1s forwards;
+  margin-left: -1px;
+}
+
+/* Dark mode smoke (white smoke on dark bg) */
+.dark .ai-word-smoke::before,
+.dark .ai-word-smoke::after {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 40%, transparent 70%);
+}
+
+.dark .ai-word-smoke .smoke-particle {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.3) 45%, transparent 70%);
+}
+
+/* Light mode smoke (subtle white/gray) */
+.ai-word-smoke::before,
+.ai-word-smoke::after {
+  background: radial-gradient(circle, rgba(200, 200, 200, 0.7) 0%, rgba(180, 180, 180, 0.2) 50%, transparent 70%);
+}
+
+.ai-word-smoke .smoke-particle {
+  background: radial-gradient(circle, rgba(200, 200, 200, 0.6) 0%, rgba(180, 180, 180, 0.15) 50%, transparent 70%);
+}
+
+/* Override for dark mode */
+.dark .ai-word-smoke::before,
+.dark .ai-word-smoke::after {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 40%, transparent 70%);
+}
+
+.dark .ai-word-smoke .smoke-particle {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.3) 45%, transparent 70%);
+}
+
+/* AI word appearing animation */
+.ai-word-appear {
+  display: inline;
+  animation: wordFadeIn 0.15s ease-out forwards;
+}
+
+/* Remove smoke after animation completes (performance) */
+.ai-word-smoke.smoke-done::before,
+.ai-word-smoke.smoke-done::after,
+.ai-word-smoke.smoke-done .smoke-particle {
+  display: none;
+}
+
+/* --- Line-by-line reveal for AI generated content --- */
+@keyframes lineReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* No animation for line reveal, using character reveal instead */
+.ai-line-reveal {
+  opacity: 1;
+}
+
+/* --- Streaming cursor blink --- */
+@keyframes cursorBlink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Cursor hidden as per request */
+.ai-streaming-cursor::after {
+  content: '';
+}
+
+/* --- Spinner animation for buttons --- */
+@keyframes btnSpinnerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-spinner {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  animation: btnSpinnerRotate 0.8s linear infinite;
+}
+
+.btn-spinner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 2px;
+  opacity: 0.3;
+  box-shadow:
+    0px 0px 0 0 currentColor,
+    /* Remaining spokes via box-shadow trick */
+    -3.5px 2px 0 0 currentColor,
+    -3.5px -2px 0 0 currentColor,
+    3.5px 2px 0 0 currentColor,
+    3.5px -2px 0 0 currentColor;
+}
+
+/* Custom scrollbar improvements */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.5);
+}
+
+/* Ensure chat container never causes overflow */
+.chat-messages-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Prevent content from pushing the page */
+.message-content-wrapper {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Slow smooth auto-scroll for chat area */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}

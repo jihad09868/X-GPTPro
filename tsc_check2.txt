@@ -1,0 +1,4 @@
+﻿components/Chat/ChatMessage.tsx(303,9): error TS2552: Cannot find name 'setIsFeedbackLoading'. Did you mean 'setIsEditLoading'?
+components/Chat/ChatMessage.tsx(305,13): error TS2552: Cannot find name 'setIsFeedbackLoading'. Did you mean 'setIsEditLoading'?
+components/services/ollamaService.ts(2,65): error TS2307: Cannot find module '../constants' or its corresponding type declarations.
+components/services/ollamaService.ts(3,25): error TS2307: Cannot find module '../types' or its corresponding type declarations.

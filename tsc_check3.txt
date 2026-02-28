@@ -1,0 +1,2 @@
+﻿components/services/ollamaService.ts(2,65): error TS2307: Cannot find module '../constants' or its corresponding type declarations.
+components/services/ollamaService.ts(3,25): error TS2307: Cannot find module '../types' or its corresponding type declarations.

@@ -1,0 +1,7 @@
+{
+  "name": "DeepSeek Chat Clone",
+  "description": "A ChatGPT-styled interface for interacting with a custom DeepSeek Ollama endpoint.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
